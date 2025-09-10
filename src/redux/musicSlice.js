@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { data } from "react-router-dom";
+
 const musicSlice = createSlice({
   name: "music",
   initialState: {
@@ -15,24 +15,21 @@ const musicSlice = createSlice({
       state.selected = action.payload;
     },
     nextSong: (state) => {
-      let idx = state.data.findIndex((item) => item.id === state.selected.id);
-      let next = idx + 1;
-      if (next === state.data.length) {
-        return 
+      const idx = state.data.findIndex((item) => item.id === state.selected.id);
+      const next = idx + 1;
+      if (next < state.data.length) {
+        state.selected = state.data[next];
       }
-      state.selected = state.data[next];
     },
     prevSong: (state) => {
-      let idx = state.data.findIndex((item) => item.id === state.selected.id);
-      let prev = idx - 1;
-      if (prev < 0) {
-        return 
+      const idx = state.data.findIndex((item) => item.id === state.selected.id);
+      const prev = idx - 1;
+      if (prev >= 0) {
+        state.selected = state.data[prev];
       }
-      state.selected = state.data[prev];
     },
-
   },
 });
-export const { setData, setSelected, nextSong, prevSong } = musicSlice.actions;
 
+export const { setData, setSelected, nextSong, prevSong } = musicSlice.actions;
 export default musicSlice.reducer;

@@ -4,64 +4,62 @@ import { Link } from "react-router-dom";
 
 function SongDescriptions() {
   const selectedMusic = useSelector((state) => state.music.selected);
-  // console.log(selectedMusic);
 
   return (
-    <div className="relative overflow-hidden w-full h-full col-span-full flex gap-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-lg">
+    <div className="relative w-full h-[calc(100vh-90px)] flex flex-col md:flex-row  gap-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-lg p-4 md:p-6">
       {/* Back button */}
       <Link to="/">
-        <button className="absolute top-1 right-2 text-xl">🔙</button>
+        <button className="absolute top-2 right-3 text-2xl hover:scale-110 transition-transform z-10">
+          🔙
+        </button>
       </Link>
 
-      {/* Image Section */}
-      <div className="ml-2 w-[40%] h-96 overflow-hidden rounded-xl shadow-md flex items-center justify-center bg-black/20">
+      {/* Image */}
+      <div className="w-full md:w-[40%] max-h-[60vh] overflow-hidden rounded-xl shadow-md flex items-center justify-center bg-black/20">
         <img
-          className="h-full object-contain transition-transform duration-300 hover:scale-105"
+          className="h-full w-auto object-contain transition-transform duration-300 hover:scale-105"
           src={selectedMusic?.image}
-          alt="cover"
+          alt={selectedMusic?.title || "cover"}
         />
       </div>
 
-      {/* Details Section */}
-      <div className="w-[50%] h-full flex justify-center flex-col gap-6">
-        {/* Title */}
-        <div className="flex items-center gap-3">
-          <h1 className="font-bold text-2xl text-yellow-400 capitalize">
+      {/* Details */}
+      <div className="w-full md:w-[55%] flex-1 flex flex-col justify-start md:justify-center gap-4 md:gap-6 overflow-y-auto">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <h1 className="font-bold text-xl md:text-2xl text-yellow-400">
             Title:
           </h1>
-          <p className="font-medium text-2xl">{selectedMusic?.title}</p>
+          <p className="font-medium text-lg md:text-2xl break-words">
+            {selectedMusic?.title}
+          </p>
         </div>
 
-        {/* Song */}
-        <div className="flex items-center gap-3">
-          <h1 className="font-bold text-2xl text-yellow-400 capitalize">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <h1 className="font-bold text-xl md:text-2xl text-yellow-400">
             Song:
           </h1>
-          <p className="font-medium text-2xl">{selectedMusic?.song}</p>
+          <p className="font-medium text-lg md:text-2xl break-words">
+            {selectedMusic?.song}
+          </p>
         </div>
 
-        {/* Singer */}
-        <div className="flex items-center gap-3">
-          <h1 className="font-bold text-2xl text-yellow-400 capitalize">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <h1 className="font-bold text-xl md:text-2xl text-yellow-400">
             Singer:
           </h1>
-          <p className="font-medium text-2xl">{selectedMusic?.singer}</p>
+          <p className="font-medium text-lg md:text-2xl break-words">
+            {selectedMusic?.singer}
+          </p>
         </div>
 
-        {/* Description */}
-        <div className="flex gap-2">
-          <h1 className="mt-[3px] font-bold text-2xl text-yellow-400 capitalize">
+        <div className="flex flex-col gap-2">
+          <h1 className="font-bold text-xl md:text-2xl text-yellow-400">
             Description:
           </h1>
-          <p className="font-medium text-2xl wrap-normal leading-relaxed text-gray-200">
+          <p className="font-medium text-base md:text-xl leading-relaxed text-gray-200 overflow-y-auto break-words">
             {selectedMusic?.description}
           </p>
         </div>
-        <audio controls>
-          <source src={selectedMusic.song} type="audio/mpeg" />
-          {/* <source src="/songs/song1.mp3"/> */}
-          {/* {console.log(selectedMusic?.song)} */}
-        </audio>
       </div>
     </div>
   );
